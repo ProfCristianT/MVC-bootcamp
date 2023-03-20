@@ -1,25 +1,21 @@
 import express from "express"
-import mongoose from "mongoose"
 import multer from "multer";
-import cors from "cors"
-import RouterAPI from "./routers/Router.js"
-import * as dotenv from 'dotenv'
+import "./providers/Mongo.provider.js"
+import hbs from "./config/handlebars.js";
+import RoutesWeb from "./routes/web.routes.js"
+import {config} from "dotenv"
+config()
 
-dotenv.config({path: "./.env"})
-
-mongoose.set('strictQuery', false)
-await mongoose.connect(`mongodb://${process.env.DB_URL}/${process.env.DB_DATABASE}`);
 
 const app = express()
 
+//Handlebars 
+app.engine("hbs", hbs.engine)
+app.set("view engine", "hbs")
+app.set("views", process.env.VIEWS_FOLDER)
+
 //Middlewares
-app.use( cors({
-    origin: 'http://127.0.0.1:5500',
-    optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
-}) )
-
-app.use( express.static("./REST/public") )
-
+// View requests info
 app.use((req, res, next) => {
     console.log("Method: " + req.method)
     console.log("URL: " + req.url)
@@ -28,18 +24,18 @@ app.use((req, res, next) => {
     next()
 })
 
+// Serve static files
+app.use( express.static("/public") )
+
+
 // req.body
-app.use( express.json() )
-app.use( express.urlencoded({extended:true}) )
-app.use( multer().none() )
+app.use( express.json() ) //json
+app.use( express.urlencoded({extended:true}) ) //form urlencoded
+app.use( multer().none() ) //form multipart-formdata
 
 
 //Router
-app.get("/", (req, res) => {
-    res.send("HOME")
-})
-
-app.use(RouterAPI)
+app.use(RoutesWeb)
 
 
-app.listen(8080)
+app.listen(process.env.APP_PORT)
