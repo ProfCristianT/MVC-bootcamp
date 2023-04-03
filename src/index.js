@@ -4,8 +4,11 @@ import "./providers/Mongo.provider.js"
 import hbs from "./config/handlebars.js";
 import RoutesWeb from "./routes/web.routes.js"
 import {config} from "dotenv"
+import cartMiddleware from "./middlewares/cart.js";
+import cookieParser from "cookie-parser"
+import {SetResRenderDafaultValues} from "./middlewares/SetResRenderDefaultValues.js"
 config()
-
+ 
 
 const app = express()
 
@@ -25,8 +28,13 @@ app.use((req, res, next) => {
 })
 
 // Serve static files
-app.use( express.static("/public") )
+app.use( express.static("./public") )
 
+//Cookies
+app.use( cookieParser() )
+
+//Middleware de cart
+app.use( cartMiddleware )
 
 // req.body
 app.use( express.json() ) //json
@@ -34,8 +42,10 @@ app.use( express.urlencoded({extended:true}) ) //form urlencoded
 app.use( multer().none() ) //form multipart-formdata
 
 
+app.use( SetResRenderDafaultValues() )
+
 //Router
 app.use(RoutesWeb)
 
 
-app.listen(process.env.APP_PORT)
+app.listen(process.env.APP_PORT||8080)

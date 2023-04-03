@@ -1,0 +1,48 @@
+<header>
+	<nav class="navbar navbar-expand-lg bg-light ">
+		<div class="container-fluid">
+	    <a class="navbar-brand" href="#">Users</a>
+	      <ul class="navbar-nav me-auto mb-2 mb-lg-0 d-flex">
+	        <li class="nav-item">
+	          	<a class="nav-link" href="/user/getAll">
+	          	Todos
+	      		</a>
+	        </li>
+	        <li class="nav-item">
+	          	<a class="nav-link" href="/user/create">Crear +</a>
+	        </li>	     
+	      </ul>
+	      <form class="d-flex" role="search" action="/user/search">
+	        <input class="form-control me-2" type="search" placeholder="Buscar User" aria-label="Search" name="q">
+	        <button class="btn btn-outline-success" type="submit">Buscar</button>
+	      </form>
+	</nav>
+	</div>
+</header>
+
+<main  class="container-l row row-cols" >
+	{{#with user}}
+	<div class="card mx-auto" style="width: 50%;">
+	  <img src="" class="card-img-top" alt="">
+	  <div class="card-body">
+	    <h5 class="card-title m-5">{{nombre}} {{apellido}} ({{edad}})</h5>
+	    <p class="card-text m-5">DNI: {{dni}}</p>
+	    <p class="card-text m-5">Fecha de Creacion: {{fechaCreacion}}</p>
+	    <p class="card-text m-5">Fecha de ultima modificación: {{ultimaModificacion}}</p>
+
+        <div class="container my-5" style="text-align: center;">
+            <a href="/user/edit/{{_id}}" class="col-5 btn btn-primary" >
+                Editar
+            </a>
+
+            <a href="/user/delete/{{_id}}" class="col-5 btn btn-danger delete" >
+                Borrar
+            </a>
+        </div>
+	  </div>
+	</div>
+	{{/with}}
+</main>
+
+<script src="/js/handleClickDelete.js"></script>
+

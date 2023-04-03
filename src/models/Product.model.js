@@ -7,7 +7,7 @@ const schema = new mongoose.Schema({
     color: [String],
     technic: {},
     category: String,
-    img: String
+    imgs: [String]
 })
 
 // products  -> Product
