@@ -1,9 +1,9 @@
-import UserModel from "./User.model.js"
+import UserModel from "../models/User.model.js"
 import jwt from "jsonwebtoken"
 import { config } from "dotenv"
 import bcrypt from "bcryptjs"
 import {v4 as uuid} from "uuid"
-import transporter from "../../utilities/mailer.js"
+import transporter from "../utilities/mailer.js"
 config()
 //const tokenKey = "kqjqwlkjelk12jl3k1j23lk1j2l3kj12lk3j123"
 const sendEmailValidateAccount = async (email, name, verifyKey)=>{
@@ -100,7 +100,7 @@ export const verifyAccount = async (req, res) => {
 }
 
 
-export const login = async (req, res) => {
+export const loginProccess = async (req, res) => {
     const { username, password } = req.body
 
     const user = await UserModel.findOne({ username }, { _id: 0, password: 1, active: 1 })// undefined
@@ -124,17 +124,29 @@ export const login = async (req, res) => {
     // }
 }
 
-export const currentUser = async (req, res) => {
-    const { username } = req.decodedToken
-    const user = await UserModel.find({ username }, { _id: 0, username: 1, email: 1, name: 1 })
-    //res.json(user)
-    res.json({
-        username: user.username,
-        email: user.email,
-        name: user.name
-    })
+// export const currentUser = async (req, res) => {
+//     const { username } = req.decodedToken
+//     const user = await UserModel.find({ username }, { _id: 0, username: 1, email: 1, name: 1 })
+//     //res.json(user)
+//     res.json({
+//         username: user.username,
+//         email: user.email,
+//         name: user.name
+//     })
+// }
+
+
+export const login = (req, res)=>{
+    res.render("User/login")
 }
 
+export const createAccount = (req, res)=>{
+    res.render("User/createAccount")
+}
+
+export const currentUser = (req, res)=>{
+    res.render("User/detail")
+}
 
 // UserModel.create({
 //     name: "Carlos Perez",
