@@ -1,0 +1,73 @@
+<section id="productDetail">
+	{{#unless product}}
+	<header>
+		<h2>No hay resultados para tu búsqueda ¯\_(ツ)_/¯</h2>
+	</header>
+	{{/unless}}
+
+	{{#if product}}
+	<main>
+		{{#with product._doc}}
+		<div class="container-left">
+			<div class="images">
+				{{#each imgs}}
+				<img src="/img/products/{{this}}" alt="">
+				{{/each}}
+
+				{{#unless imgs}}
+				<img src="/img/no-image.jpg" alt="">
+                {{/unless}}
+
+				{{#if sale}}
+				<span class="sale">¡Oferta!</span>
+				{{/if}}
+			</div>
+		</div>
+		<div class="container-right">
+
+			<div class="container-sticky">
+				<div class="title">
+					<h2 >{{brand}} <span>{{model}}</span></h2>
+					<span class="category">{{category}}</span>
+				</div>
+				<p class="description">{{description}}</p>
+
+				<div class="table-container">
+					<table>
+						<tbody>
+							{{#each technic}}
+							<tr>
+								<th>{{@key}}</th>
+								<td>{{this}}</td>
+							</tr>
+							{{/each}}
+						</tbody>
+					</table>
+				</div>
+				<h3 class="price">${{price}}</h3>
+			</div>
+
+			{{#if inCart}}
+				<div class="counter">
+					<a href="/cart/subtractProduct/{{_id}}">-</a>
+					<span>{{quantity}}</span>
+					<a href="/cart/addProduct/{{_id}}">+</a>
+				</div>
+			{{else}}
+				<div class="buttons">
+					<a href="/cart/addProduct/{{_id}}" class="btn-primary">Añadir <span>+</span></a>
+				</div>
+			{{/if}}
+
+
+		</div>
+
+		{{/with}}
+
+	</main>
+	{{/if}}
+
+	<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+	<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+</section>
+

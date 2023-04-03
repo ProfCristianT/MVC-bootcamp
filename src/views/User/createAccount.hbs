@@ -1,0 +1,56 @@
+<section id="createAccount">
+    <header>
+        <h1>Create Account</h1>
+    </header>
+    <main>
+        <form action="" method="POST">
+            <div class="field">
+                <label for="name">Name</label>
+                <input type="text" name="name" id="name" value="{{data.name}}">
+                {{#if nameErrMsg}}
+                <span class="errMsg">{{nameErrMsg}}</span>
+                {{/if}}
+            </div>
+            <div class="field">
+                <label for="username">Username</label>
+                <input type="text" name="username" id="username" value="{{data.username}}">
+                {{#if usernameErrMsg}}
+                <span class="errMsg">{{usernameErrMsg}}</span>
+                {{/if}}
+            </div>
+            <div class="field">
+                <label for="email">Email</label>
+                <input type="text" name="email" id="email" value="{{data.email}}">
+                {{#if emailErrMsg}}
+                <span class="errMsg">{{emailErrMsg}}</span>
+                {{/if}}
+            </div>
+            <div class="field">
+                <label for="birth">Birth</label>
+                <input type="date" name="birth" id="birth" value="{{data.birth}}">
+                {{#if birthErrMsg}}
+                <span class="errMsg">{{birthErrMsg}}</span>
+                {{/if}}
+            </div>
+            <div class="field">
+                <label for="password">Password</label>
+                <input type="text" name="password" id="password" value="{{data.password}}">
+                {{#if passwordErrMsg}}
+                <span class="errMsg">{{passwordErrMsg}}</span>
+                {{/if}}
+            </div>
+            <div class="field">
+                <label for="confirmpassword">Confirm Password</label>
+                <input type="text" name="confirmpassword" id=confirm"password" value="{{data.confirmpassword}}">
+                {{#if confirmpasswordErrMsg}}
+                <span class="errMsg">{{confirmpasswordErrMsg}}</span>
+                {{/if}}
+            </div>
+            <button type="submit" class="btn-primary">Create Account</button>
+        </form>
+
+        <div>
+            <p>😊</p>
+        </div>
+    </main>
+</section>

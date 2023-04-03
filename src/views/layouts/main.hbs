@@ -4,20 +4,51 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="stylesheet" href="/css/app.css">
+    <title>Mi Web | {{title}}</title>
 </head>
 <body>
-    <header>
+    <header class="principal">
         <h1>Mi Web</h1>     
 
-        <h2>Esta logueado ? {{isLogin}}</h2>   
+        <form class="d-flex" role="search" action="/product/search">
+			<input class="form-control me-2" type="search" placeholder="Buscar productos" aria-label="Search" name="q" value="{{searchValue}}">
+			<button class="btn btn-outline-success" type="submit">🔍</button>
+		</form>
+
+        <nav>
+            <a href="/">Home</a>
+            <a href="/product/all" id="productBtn">Products</a>
+                <nav id="productNav">
+                    <a href="/product/category/Smartphone">Smartphones</a>
+                    <a href="/product/category/Tablet">Tablets</a>
+                    <a href="/product/category/Laptop">Laptops</a>
+                    <a href="/product/category/TV">TVs</a>
+                    <a href="/product/category/Audio">Audio</a>
+                </nav>
+            <a href="/product/sale">Sale</a>
+            <a href="/cart" id="cartBtn">
+                Cart 
+            </a>
+
+            {{#if session?.user}}
+            <a href="/user/me">My Account</a>
+                {{!-- <nav id="accountNav">
+                    <a href="/user/editPerfil">Edit Perfil</a>
+                    <a href="/user/changePassword">Change Password</a>
+                    <a href="/user/signout">Sign Out</a>
+                </nav> --}}
+            {{else}}
+            <a href="/user/login">Login</a>
+            {{/if}}
+        </nav>
     </header>
 
     <main>
         {{{body}}}
     </main>
 
-    <footer>
+    <footer class="principal">
         <p>Mi Web &copy 2023</p>
     </footer>
 </body>

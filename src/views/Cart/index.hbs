@@ -1,0 +1,55 @@
+<section id="sectionCart">
+    <header>
+        <h1>Cart</h1>
+
+    </header>
+
+    <main>
+        <div class="titles">
+            <span class="img">📷</span>
+            <h2 class="title">Product</h2>
+            <h2 class="price">Price</h2>
+            <h2 class="quantity">Quantity</h2>
+            <h2 class="subtotal">Subtotal</h2>
+            <h2 class="delete">Delete</h2>
+
+        </div>
+        {{#each products}}
+        <div class="cartProductItem" id="{{this._id}}">
+            {{#if this.imgs}}
+            <img class="img" src="/img/products/{{this.imgs.[0]}}" alt="">
+            {{/if}}
+
+            {{#unless this.imgs.[0]}}
+			<img class="img" src="/img/no-image.jpg" alt="">
+            {{/unless}}
+
+            <a class="title" href="/product/detail/{{this._id}}/{{this.brand}}-{{this.model}}">
+                {{this.brand}} {{this.model}}
+            </a>
+
+            <span class="price">${{this.price}}</span>
+            <div class="counter">
+                <a href="/cart/subtractProduct/{{this._id}}">-</a>
+                <span>{{this.quantity}}</span>
+                <a href="/cart/addProduct/{{this._id}}">+</a>
+            </div>
+            <span class="subtotal">${{subtotal}}</span>
+            <a href="/cart/deleteProduct/{{this._id}}" class="deleteBtn">🗑</a>
+        </div>
+        {{/each}}
+    </main>
+
+
+    <aside>
+        <div class="texts">
+            <h2>TOTAL: ${{total}}</h2>
+
+        </div>
+
+        <div class="buttons">
+            <a href="/cart/checkOut" class="btn-primary">Confirmar compra</a>
+            <a href="/" class="btn-seconday">Seguir comprando</a>
+        </div>
+    </aside>
+</section>

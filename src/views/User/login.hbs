@@ -1,0 +1,42 @@
+<section id="signin">
+    <header>
+        <h1>Sign in</h1>
+    </header>
+    <main>
+        <form action="/user/signinWithForm" method="post">
+
+            {{#if errMsg}}
+            <span class="errMsg">{{errMsg}}</span>
+            {{/if}}
+            {{#if successMsg}}
+            <span class="successMsg">{{successMsg}}</span>
+            {{/if}}
+
+            <div class="field">
+                <label for="username">Username</label>
+                <input type="text" name="username" id="username">
+            </div>
+
+            <div class="field">
+                <label for="password">Password</label>
+                <input type="text" name="password" id="password">
+
+                <a href="">Forgot password?</a>
+            </div>
+
+            <div class="buttons">
+                <button type="submit" class="btn-primary">Sign in</button>
+                <a type="button" class="btn-secondary" href="/user/createAccount">Create Account</a>
+            </div>
+        </form>
+
+        <span class="division"></span>
+
+        <div class="socialLogin">
+            <h3>Sign In with social network</h3>
+            <a href="" class="btn-singin-facebook"> Sign In whit Facebook</a>
+            <a href="" class="btn-singin-google">Sign In whit Google</a>
+
+        </div>
+    </main>
+</section>
